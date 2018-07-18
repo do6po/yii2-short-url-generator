@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=short-url-generator',
+    'dsn' => 'mysql:host=localhost;dbname=short_url_generator',
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8',

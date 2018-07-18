@@ -109,8 +109,8 @@ mysql -uroot -proot <<< "FLUSH PRIVILEGES"
 echo "Done!"
 
 info "Initailize databases for MySQL"
-mysql -uroot -proot <<< "CREATE DATABASE short-url-generator CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-mysql -uroot -proot <<< "CREATE DATABASE short-url-generator_tests CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -uroot -proot <<< "CREATE DATABASE short_url_generator CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+mysql -uroot -proot <<< "CREATE DATABASE short_url_generator_tests CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
 echo "Done!"
 
 info "Install composer"
