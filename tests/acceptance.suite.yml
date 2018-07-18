@@ -1,0 +1,20 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://short-url-generator.test/
+            ## PHANTOMJS ##
+            browser: phantomjs
+            window_size: 1024x768
+            ## SELENIUM ##
+            #browser: chrome
+            #window_size: maximize
+            #host: 192.168.102.1
+            #port: 4444
+            #clear_cookies: true
+        - Yii2:
+            part: [orm, fixtures]
+            entryScript: index-test.php
+            #cleanup: true # выгружать (удалять) фикстуры в _after() и загружать в _before()
+            #transaction: false # не оборачивать тесты в транзакции
+        #- \backend\tests\Helper\Acceptance
