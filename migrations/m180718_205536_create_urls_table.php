@@ -23,7 +23,7 @@ class m180718_205536_create_urls_table extends Migration
             'id' => $this->primaryKey(),
             'long' => $this->string(2083)->notNull(),
             'short' => $this->string(64)->notNull(),
-            'duration' => $this->integer()->unsigned(),
+            'expired_at' => $this->integer()->unsigned(),
             'created_at' => $this->integer()->unsigned(),
         ], $tableOptions);
     }
