@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ConversionSearch;
 use app\models\Url as UrlModel;
 use app\services\ConversionService;
 use app\services\UrlService;
@@ -115,8 +116,12 @@ class UrlGenerateController extends Controller
     public function actionUrlInfo($id)
     {
         $url = $this->findUrl($id);
+        $conversionSearch = new ConversionSearch();
+
         return $this->render('info', [
             'url' => $url,
+            'conversionSearch' => $conversionSearch,
+            'conversionDataProvider' => $conversionSearch->search($url),
         ]);
     }
 
@@ -146,7 +151,7 @@ class UrlGenerateController extends Controller
      */
     public function findUrl($id)
     {
-        if (($url = UrlModel::findOne($id)) !== null ) {
+        if (($url = UrlModel::findOne($id)) !== null) {
             return $url;
         }
 
@@ -160,7 +165,7 @@ class UrlGenerateController extends Controller
      */
     public function findByShort($short)
     {
-        if (($url = UrlModel::findByShort($short)) !== null ) {
+        if (($url = UrlModel::findByShort($short)) !== null) {
             return $url;
         }
 
