@@ -34,8 +34,7 @@ info "Apply tests migrations"
 php yii_test migrate --interactive=0
 #
 #info "Apply fixtures"
-#php yii fixture "*" --interactive=0
-
+#php yii fixture "fixtures/*" --interactive=0
 
 info "Create bash-alias 'app' for vagrant user"
 echo 'alias app="cd /app"' | tee /home/vagrant/.bash_aliases

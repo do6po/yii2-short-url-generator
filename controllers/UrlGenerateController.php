@@ -130,6 +130,10 @@ class UrlGenerateController extends Controller
     {
         $url = $this->findByShort($short);
 
+        if ($url->isExpired()) {
+            return $this->redirect(['url-info', 'id' => $url->id]);
+        }
+
         $this->_conversionService->create($url, $this->_request);
 
         return $this->redirect($url->long);

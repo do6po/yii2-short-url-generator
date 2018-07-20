@@ -9,6 +9,7 @@
 use supplyhog\ClipboardJs\ClipboardJsWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap\Alert;
 
 /** @var \app\models\Url $url */
 /** @var $this yii\web\View */
@@ -22,6 +23,17 @@ $shortUrl = Url::to([sprintf('/%s', $url->short)], true);
     <h1><?= $this->title ?> </h1>
 
     <div class="row">
+        <?php if ($url->isExpired()): ?>
+            <div class="col-md-12">
+                <?= Alert::widget([
+
+                    'body' => Yii::t('app', 'This URL is expired'),
+                    'options' => [
+                        'class' => 'alert-warning',
+                    ],
+                ]) ?>
+            </div>
+        <?php endif; ?>
         <div class="col-md-10">
             <?= Html::input('text', 'short-url', $shortUrl, [
                 'class' => 'form-control input-lg',
@@ -33,6 +45,7 @@ $shortUrl = Url::to([sprintf('/%s', $url->short)], true);
                 'text' => $shortUrl,
                 'htmlOptions' => [
                     'class' => 'btn btn-warning btn-lg',
+                    'disabled' => $url->isExpired() ? 'disabled' : null,
                 ],
             ]) ?>
         </div>

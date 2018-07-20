@@ -102,6 +102,11 @@ class Url extends ActiveRecord
         $this->expired_at = time() + $duration;
     }
 
+    public function isExpired(): bool
+    {
+        return $this->expired_at <= time();
+    }
+
     public function getDuration(): int
     {
         if ($this->expired_at > time()) {

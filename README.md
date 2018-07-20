@@ -1,7 +1,7 @@
 REQUIREMENTS
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 7.1.0.
+php >= 7.1.0
 
 
 INSTALLATION
@@ -12,6 +12,17 @@ INSTALLATION
 ```bash
 git clone https://github.com/do6po/yii2-short-url-generator
 cd yii2-short-url-generator
-vagrant up
+```
 
+### Install vagrant plugins
+
+```bash
+vagrant plugin install vagrant-hostmanager
+vagrant up
+```
+
+### Start vagrant
+
+```bash
+vagrant up
 ```
