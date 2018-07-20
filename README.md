@@ -7,7 +7,7 @@ php >= 7.1.0
 INSTALLATION
 ------------
 
-### Install via Composer
+### Install via git
 
 ```bash
 git clone https://github.com/do6po/yii2-short-url-generator
