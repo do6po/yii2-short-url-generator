@@ -58,13 +58,13 @@ class UrlTest extends Unit
     {
         return [
             'long required' => ['long', null, false],
-            'long long url' => ['long', sprintf('http://short-url-generator.test/g?=%s', str_repeat('a', 1965)), false],
+            'long too long url' => ['long', sprintf('http://short-url-generator.test/g?=%s', str_repeat('a', 1965)), false],
             'long normal url' => ['long', sprintf('http://short-url-generator.test/g?=%s', str_repeat('a', 1960)), true],
             'long not url' => ['long', 'aaaaa', false],
             'short unique' => ['short', 'apsodksc', false],
-            'short required' => ['short', null, false],
-            'short to short' => ['short', 'fgksdl', false],
-            'short to long' => ['short', str_repeat('a', 65), false],
+            'short required' => ['short', null, true],
+            'short too short' => ['short', 'fgksdl', false],
+            'short too long' => ['short', str_repeat('a', 65), false],
             'short normal' => ['short', '12345678', true],
             'expired_at string' => ['expired_at', 'asdasd', false],
             'expired_at integer' => ['expired_at', time(), true],
@@ -110,5 +110,21 @@ class UrlTest extends Unit
         $this->assertTrue(is_array($expiredUrls));
         $this->assertEquals(2, count($expiredUrls));
 
+    }
+
+    public function testGetDuration()
+    {
+        $this->_model->expired_at = time() + 60;
+        $this->assertTrue($this->_model->duration <= 60 || $this->_model->duration > 59);
+
+        $this->_model->expired_at = time();
+        $this->assertEquals(0, $this->_model->duration);
+    }
+
+    public function testSetDuration()
+    {
+        $this->_model->duration = 60;
+        $expected = $this->_model->expired_at;
+        $this->assertTrue($expected > time() + 59 || $expected < time() + 61);
     }
 }
