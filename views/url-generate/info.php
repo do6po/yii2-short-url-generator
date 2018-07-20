@@ -36,35 +36,33 @@ $shortUrl = Url::to([sprintf('/%s', $url->short)], true);
             ]) ?>
         </div>
     <?php endif; ?>
-    <div class="row">
-        <div class="col-md-8">
-            <?= Html::input('text', 'short-url', $shortUrl, [
-                'class' => 'form-control input-lg',
-                'disabled' => 'disabled',
-                'title' => $url->long,
-            ]) ?>
-        </div>
-        <div class="col-md-2">
-            <?= ClipboardJsWidget::widget([
-                'id' => 'copyShortURL',
-                'label' => Yii::t('app', 'Copy short URL'),
-                'text' => $shortUrl,
-                'htmlOptions' => [
-                    'class' => 'btn btn-warning btn-lg',
-                    'disabled' => $url->isExpired() ? 'disabled' : null,
-                ],
-            ]) ?>
-        </div>
-        <div class="col-md-2">
-            <?= ClipboardJsWidget::widget([
-                'id' => 'copyThisPageURL',
-                'label' => Yii::t('app', 'Copy statistic URL'),
-                'text' => Url::current([], true),
-                'htmlOptions' => [
-                    'class' => 'btn btn-default btn-lg',
-                ],
-            ]) ?>
-        </div>
+    <div class="col-md-8">
+        <?= Html::input('text', 'short-url', $shortUrl, [
+            'class' => 'form-control input-lg',
+            'disabled' => 'disabled',
+            'title' => $url->long,
+        ]) ?>
+    </div>
+    <div class="col-md-2">
+        <?= ClipboardJsWidget::widget([
+            'id' => 'copyShortURL',
+            'label' => Yii::t('app', 'Copy short URL'),
+            'text' => $shortUrl,
+            'htmlOptions' => [
+                'class' => 'btn btn-warning btn-lg',
+                'disabled' => $url->isExpired() ? 'disabled' : null,
+            ],
+        ]) ?>
+    </div>
+    <div class="col-md-2">
+        <?= ClipboardJsWidget::widget([
+            'id' => 'copyThisPageURL',
+            'label' => Yii::t('app', 'Copy statistic URL'),
+            'text' => Url::current([], true),
+            'htmlOptions' => [
+                'class' => 'btn btn-default btn-lg',
+            ],
+        ]) ?>
     </div>
 </div>
 
