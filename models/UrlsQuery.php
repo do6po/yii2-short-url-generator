@@ -29,7 +29,7 @@ class UrlsQuery extends ActiveQuery
      * {@inheritdoc}
      * @return Url|array|null
      */
-    public function one($db = null): Url
+    public function one($db = null)
     {
         return parent::one($db);
     }

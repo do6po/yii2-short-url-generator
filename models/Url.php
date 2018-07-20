@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\helpers\ConfigHelper;
+use app\helpers\GeneratorHelper;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -39,15 +41,22 @@ class Url extends ActiveRecord
         return self::find()->expired()->all();
     }
 
+    /**
+     * @return array
+     * @throws \yii\base\Exception
+     */
     public function rules(): array
     {
         return [
-            [['long', 'short'], 'required'],
+            [['long'], 'required'],
             ['short', 'unique'],
             [['expired_at', 'created_at', 'duration'], 'integer'],
             ['expired_at', 'default', 'value' => time() + self::DEFAULT_DURATION_VALUE],
             [['long'], 'string', 'max' => 1995],
             [['long'], 'url'],
+            ['short', 'default', 'value' => GeneratorHelper::generateRandomString(
+                ConfigHelper::getShortUrlLength()
+            )],
             [['short'], 'string', 'min' => 8, 'max' => 64],
         ];
     }
