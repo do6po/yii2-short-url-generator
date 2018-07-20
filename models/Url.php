@@ -121,4 +121,9 @@ class Url extends ActiveRecord
             self::DAY * 360 => Yii::t('app', 'Year'),
         ];
     }
+
+    public static function deleteAllExpired(): int
+    {
+        return self::deleteAll(['<', 'expired_at', time()]);
+    }
 }

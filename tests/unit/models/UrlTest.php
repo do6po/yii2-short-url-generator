@@ -169,4 +169,25 @@ class UrlTest extends Unit
             'url_id' => 3,
         ]);
     }
+
+    public function testDeleteAllExpired()
+    {
+        $this->tester->haveFixtures([ConversionFixtures::class]);
+
+        $this->tester->seeRecord(Url::class, [
+            'id' => 2,
+        ]);
+        $this->tester->seeRecord(Url::class, [
+            'id' => 3,
+        ]);
+
+        $this->assertEquals(2, Url::deleteAllExpired());
+
+        $this->tester->dontSeeRecord(Url::class, [
+            'id' => 2,
+        ]);
+        $this->tester->dontSeeRecord(Url::class, [
+            'id' => 3,
+        ]);
+    }
 }
