@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49fcd1d8393cd6f7edb64242fa3707e9",
+    "content-hash": "59bb2f70128fe51c9c0cb57f4baf634f",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -232,6 +232,109 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "maxmind-db/reader",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+                "reference": "e042b4f8a2dff41e19019faf16427178b07fbd58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/e042b4f8a2dff41e19019faf16427178b07fbd58",
+                "reference": "e042b4f8a2dff41e19019faf16427178b07fbd58",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.*",
+                "phpunit/phpunit": "4.* || 5.*",
+                "satooshi/php-coveralls": "1.0.*",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "suggest": {
+                "ext-bcmath": "bcmath or gmp is required for decoding larger integers with the pure PHP decoder",
+                "ext-gmp": "bcmath or gmp is required for decoding larger integers with the pure PHP decoder",
+                "ext-maxminddb": "A C-based database decoder that provides significantly faster lookups"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\Db\\": "src/MaxMind/Db"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "http://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind DB Reader API",
+            "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+            "keywords": [
+                "database",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2018-02-21T21:23:33+00:00"
+        },
+        {
+            "name": "overals/yii2-geoip2",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overals/yii2-geoIP2.git",
+                "reference": "77fdfdd3458c0ad2dbcc7ef036a11cec6c3dbf91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overals/yii2-geoIP2/zipball/77fdfdd3458c0ad2dbcc7ef036a11cec6c3dbf91",
+                "reference": "77fdfdd3458c0ad2dbcc7ef036a11cec6c3dbf91",
+                "shasum": ""
+            },
+            "require": {
+                "maxmind-db/reader": "~1.0",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": ">=2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "overals\\GeoIP2\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Evgeny Gorchak",
+                    "email": "evgenygor89@gmail.com"
+                }
+            ],
+            "description": "Yii2 GeoIP2 extension. Returns country, city, latitude, longitude, time zone, iso code, continent, subdivisions by IP (uses MaxMind's GeoIP2 databases)",
+            "keywords": [
+                "geodata",
+                "geoip2",
+                "maxmind",
+                "yii2"
+            ],
+            "time": "2018-04-12T15:44:04+00:00"
         },
         {
             "name": "supplyhog/yii2-clipboardjs",

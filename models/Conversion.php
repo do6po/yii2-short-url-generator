@@ -14,6 +14,9 @@ use yii\db\ActiveRecord;
  * @property int $ip
  * @property int $created_at
  *
+ * @property string $country
+ * @property string $city
+ *
  * @property string $ipAddress
  *
  * @property Url $url
@@ -30,7 +33,7 @@ class Conversion extends ActiveRecord
         return [
             ['ipAddress', 'ip'],
             [['url_id', 'ip', 'created_at'], 'integer'],
-            [['ip'], 'required'],
+            [['country', 'city'], 'string'],
             [['url_id'], 'exist', 'skipOnError' => true, 'targetClass' => Url::class, 'targetAttribute' => ['url_id' => 'id']],
             [['ipAddress', 'ip', 'url_id'], 'required'],
         ];

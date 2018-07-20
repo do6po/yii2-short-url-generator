@@ -30,6 +30,8 @@ class ConversionSearch extends Conversion
             'sort' => [
                 'attributes' => [
                     'created_at',
+                    'country',
+                    'city',
                     'ipAddress' => [
                         'asc' => ['ip' => SORT_ASC],
                         'desc' => ['ip' => SORT_DESC],

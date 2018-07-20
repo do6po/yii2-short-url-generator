@@ -44,3 +44,7 @@ echo 'alias codecept="/app/vendor/bin/codecept"' | tee -a /home/vagrant/.bash_al
 
 info "Enabling colorized prompt for guest console"
 sed -i "s/#force_color_prompt=yes/force_color_prompt=yes/" /home/vagrant/.bashrc
+
+info "Download geoip2 database:"
+wget -N -q http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz
+gunzip GeoLite2-City.mmdb.gz

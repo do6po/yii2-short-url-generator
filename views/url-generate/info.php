@@ -29,7 +29,6 @@ $shortUrl = Url::to([sprintf('/%s', $url->short)], true);
     <?php if ($url->isExpired()): ?>
         <div class="col-md-12">
             <?= Alert::widget([
-
                 'body' => Yii::t('app', 'This URL is expired'),
                 'options' => [
                     'class' => 'alert-warning',
@@ -67,10 +66,12 @@ $shortUrl = Url::to([sprintf('/%s', $url->short)], true);
                 'columns' => [
                     [
                         'attribute' => 'created_at',
-                        'label' => Yii::t('app', 'Converted at'),
+                        'label' => Yii::t('app', 'Redirected on'),
                         'format' => ['datetime'],
                     ],
                     'ipAddress',
+                    'country',
+                    'city',
                 ],
             ]) ?>
 

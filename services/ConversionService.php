@@ -9,6 +9,7 @@
 namespace app\services;
 
 
+use app\helpers\GeoIPHelper;
 use app\models\Conversion;
 use app\models\Url;
 use Yii;
@@ -23,10 +24,14 @@ class ConversionService
      */
     public function create(Url $url, Request $request)
     {
+        $location = GeoIPHelper::getInfoByIP($request->userIP);
+
         $conversion = Yii::createObject([
             'class' => Conversion::class,
             'ipAddress' => $request->userIP,
             'url_id' => $url->id,
+            'city' => $location->city,
+            'country' => $location->country,
         ]);
 
         $conversion->save();

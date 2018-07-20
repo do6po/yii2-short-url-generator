@@ -48,8 +48,13 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<short:\w{8}>' => 'url-generate/convert'
+                '<short:[^\s]{8}>' => 'url-generate/convert'
             ],
+        ],
+        'geoip2' => [
+            'class' => \overals\GeoIP2\GeoIP2::class,
+            'mmdb' => '@app/GeoLite2-City.mmdb',
+            'lng' => 'en', // available languages = 'de', 'en', 'es', 'ja', 'ru', 'zh-CN'
         ],
     ],
     'params' => $params,
