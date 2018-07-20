@@ -31,7 +31,9 @@ class m180720_063300_create_conversions_table extends Migration
             self::TABLE_NAME,
             'url_id',
             '{{%urls}}',
-            'id'
+            'id',
+            'CASCADE',
+            'CASCADE'
         );
     }
 

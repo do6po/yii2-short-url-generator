@@ -2,6 +2,8 @@
 
 namespace tests\models;
 
+use app\fixtures\ConversionFixtures;
+use app\models\Conversion;
 use app\models\Url;
 use Codeception\Test\Unit;
 use app\fixtures\UrlFixture;
@@ -76,12 +78,22 @@ class UrlTest extends Unit
      */
     public function testCreate()
     {
-        $url = new Url([
-            'long' => 'https://www.google.com.ua/search?num=50&safe=active&ei=sIFQW7eHDYuB0wKKxYTQDQ&q=yii+random+string&oq=yii+random+&gs_l=psy-ab.3.0.0j0i22i30k1l9.96095.98167.0.99535.7.7.0.0.0.0.156.736.4j3.7.0....0...1c.1.64.psy-ab..0.7.733...35i39k1j0i67k1j0i203k1j0i20i263k1j0i22i10i30k1.0.mjfTGMm859Q',
-            'short' => GeneratorHelper::generateRandomString(8),
+        $longUrl = 'https://www.google.com.ua/search?num=50&safe=active&ei=sIFQW7eHDYuB0wKKxYTQDQ&q=yii+random+string&oq=yii+random+&gs_l=psy-ab.3.0.0j0i22i30k1l9.96095.98167.0.99535.7.7.0.0.0.0.156.736.4j3.7.0....0...1c.1.64.psy-ab..0.7.733...35i39k1j0i67k1j0i203k1j0i20i263k1j0i22i10i30k1.0.mjfTGMm859Q';
+
+        $this->tester->dontSeeRecord(Url::class, [
+            'long' => $longUrl,
         ]);
 
+        $url = new Url([
+            'long' => $longUrl,
+            'short' => GeneratorHelper::generateRandomString(8),
+        ]);
         $this->assertTrue($url->save());
+
+        $this->tester->seeRecord(Url::class, [
+            'long' => $longUrl,
+        ]);
+
     }
 
     public function testFindByShort()
@@ -126,5 +138,35 @@ class UrlTest extends Unit
         $this->_model->duration = 60;
         $expected = $this->_model->expired_at;
         $this->assertTrue($expected > time() + 59 || $expected < time() + 61);
+    }
+
+    /**
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function testDeleteModel()
+    {
+        $this->tester->haveFixtures([ConversionFixtures::class]);
+
+        /** @var Url $url */
+        $url = Url::findOne(3);
+
+        $this->tester->seeRecord(Url::class, [
+            'long' => $url->long,
+        ]);
+
+        $this->tester->seeRecord(Conversion::class, [
+            'url_id' => 3,
+        ]);
+
+        $url->delete();
+
+        $this->tester->dontSeeRecord(Url::class, [
+            'long' => $url->long,
+        ]);
+
+        $this->tester->dontSeeRecord(Conversion::class, [
+            'url_id' => 3,
+        ]);
     }
 }

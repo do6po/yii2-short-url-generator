@@ -98,4 +98,34 @@ class ConversionsTest extends Unit
             [3, 1],
         ];
     }
+
+    /**
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function testDelete()
+    {
+        $conversionId = 1;
+        $urlId = 1;
+        $conversion = Conversion::findOne($conversionId);
+
+
+        $this->tester->seeRecord(Conversion::class, [
+            'id' => $conversionId,
+        ]);
+
+        $this->tester->seeRecord(Url::class, [
+            'id' => $urlId,
+        ]);
+
+        $conversion->delete();
+
+        $this->tester->dontSeeRecord(Conversion::class, [
+            'id' => $conversionId,
+        ]);
+
+        $this->tester->seeRecord(Url::class, [
+            'id' => $urlId,
+        ]);
+    }
 }
