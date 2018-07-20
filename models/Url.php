@@ -6,6 +6,7 @@ use app\helpers\ConfigHelper;
 use app\helpers\GeneratorHelper;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -17,6 +18,8 @@ use yii\db\ActiveRecord;
  * @property int $duration
  * @property int $expired_at
  * @property int $created_at
+ *
+ * @property Conversion[] $conversion
  */
 class Url extends ActiveRecord
 {
@@ -73,12 +76,14 @@ class Url extends ActiveRecord
         ];
     }
 
-    /**
-     * @return UrlsQuery
-     */
     public static function find(): UrlsQuery
     {
         return new UrlsQuery(get_called_class());
+    }
+
+    public function getConversions(): ActiveQuery
+    {
+        return $this->hasMany(Conversion::class, ['url_id' => 'id']);
     }
 
     public function behaviors(): array

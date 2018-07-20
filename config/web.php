@@ -48,7 +48,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<s:\w{8}>' => 'url-generate/r'
+                '<short:\w{8}>' => 'url-generate/convert'
             ],
         ],
     ],

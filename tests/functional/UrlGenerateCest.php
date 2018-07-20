@@ -51,7 +51,7 @@ class UrlGenerateCest
         ]);
 
         $I->seeResponseCodeIs(HttpCode::OK);
-        $I->seeInCurrentUrl(\yii\helpers\Url::to(['info', 'id' => 4]));
+        $I->seeInCurrentUrl(\yii\helpers\Url::to(['url-info', 'id' => 4]));
 
         $I->seeRecord(Url::class, [
             'long' => $longUrl,

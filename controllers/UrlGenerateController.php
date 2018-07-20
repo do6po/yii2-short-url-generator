@@ -3,11 +3,14 @@
 namespace app\controllers;
 
 use app\models\Url as UrlModel;
+use app\services\ConversionService;
 use app\services\UrlService;
 use Yii;
 use yii\base\Module;
+use yii\captcha\CaptchaAction;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\ErrorAction;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -24,9 +27,21 @@ class UrlGenerateController extends Controller
      */
     private $_urlService;
 
-    public function __construct(string $id, Module $module, UrlService $urlServices, array $config = [])
+    /**
+     * @var ConversionService
+     */
+    private $_conversionService;
+
+    public function __construct(
+        string $id,
+        Module $module,
+        UrlService $urlServices,
+        ConversionService $conversionService,
+        array $config = []
+    )
     {
         $this->_request = Yii::$app->request;
+        $this->_conversionService = $conversionService;
         $this->_urlService = $urlServices;
 
         parent::__construct($id, $module, $config);
@@ -54,10 +69,10 @@ class UrlGenerateController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                'class' => ErrorAction::class,
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class' => CaptchaAction::class,
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
@@ -106,13 +121,17 @@ class UrlGenerateController extends Controller
     }
 
     /**
-     * @param $s
+     * @param $short
      * @return Response
      * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
-    public function actionR($s)
+    public function actionConvert($short)
     {
-        $url = $this->findByShort($s);
+        $url = $this->findByShort($short);
+
+        $this->_conversionService->create($url, $this->_request);
+
         return $this->redirect($url->long);
     }
 
