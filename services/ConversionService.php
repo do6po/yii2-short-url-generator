@@ -20,6 +20,7 @@ class ConversionService
     /**
      * @param Url $url
      * @param Request $request
+     * @return mixed
      * @throws \yii\base\InvalidConfigException
      */
     public function create(Url $url, Request $request)
@@ -35,5 +36,7 @@ class ConversionService
         ]);
 
         $conversion->save();
+
+        return $conversion->id;
     }
 }
